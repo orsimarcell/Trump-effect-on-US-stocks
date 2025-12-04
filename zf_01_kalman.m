@@ -1,4 +1,4 @@
-function[xOut,dateOut]=kalman(data,name,Qmult)
+function[xOut,dateOut]=zf_01_kalman(data,name,Qmult)
     N=size(data.date,1);
     date=data.date; % Dates
     allDates=date(1):date(end);

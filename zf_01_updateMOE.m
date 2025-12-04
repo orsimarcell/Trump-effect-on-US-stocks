@@ -1,4 +1,4 @@
-function[moe_calc]=updateMOE(sample,moe)
+function[moe_calc]=zf_01_updateMOE(sample,moe)
     y=moe(~isnan(moe));
     x=1./sqrt(sample(~isnan(moe)));
     x=[ones(size(x,1),1),x];

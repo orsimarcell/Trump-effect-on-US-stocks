@@ -72,3 +72,9 @@ Thumbs.db
 Raw data/
 Raw data/*
 
+# ===========================
+# Word files
+# ===========================
+*.docx
+*.doc
+

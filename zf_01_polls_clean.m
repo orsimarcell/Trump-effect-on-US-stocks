@@ -1,4 +1,4 @@
-function[dataOut]=preprocess(dataIn)
+function[dataOut]=zf_01_polls_clean(dataIn)
     data=dataIn(2:end,:); % Remove the first row for processing
     data.sample=str2double(regexprep(data.sample,'\s*[a-zA-Z]*$',''));
     data.date=datetime(strcat(num2str(data.year),'/',regexprep(data.date,{'^.*-\s'},{'',''})),'InputFormat','yyyy/M/d');

@@ -51,27 +51,26 @@ CAAR=mean(CAR,2);
 %% T stats
 C=1+trace(X/(X'*X)*X')/T;
 CovAR=Sigmahat*C;
-seAR=sqrt(diag(CovAR)');
 %CovAR=kron(eye(eventWindowL),Sigmahat)+kron(Xpred/(X'*X)*Xpred',Sigmahat);
-%CovDiagAR=diag(CovAR);
-%seAR=NaN(eventWindowL,m);
-%for t=1:eventWindowL
-%    for k=1:m
-%        seAR(t,k)=sqrt(CovDiagAR(t+(k-1)*eventWindowL));
-%    end
-%end
+CovDiagAR=diag(CovAR);
+seAR=NaN(eventWindowL,m);
+for t=1:eventWindowL
+    for k=1:m
+        seAR(t,k)=sqrt(CovDiagAR(t+(k-1)*eventWindowL));
+    end
+end
 
 % Calculate the t-statistics for the average abnormal returns
-tStatAR=AR./seAR;
-pValAR=2*tcdf(abs(tStatAR),T-n,'upper');
+tStatAR=AR./seAR
+pValAR=2*tcdf(tStatAR,T-n,'upper')
 
+CovCAR=
 %CovCAR=eventWindowL*Sigmahat+kron((Xpred'*ones(eventWindowL,1))'/(X'*X)*(Xpred'*ones(eventWindowL,1)),Sigmahat);
-%seCAR=sqrt(diag(CovCAR)');
-seCAR=sqrt(sum(seAR.^2));
+seCAR=sqrt(diag(CovCAR)');
 
 % Calculate the t-statistics for the cumulated average abnormal returns
-tStatCAR=CAR./seCAR;
-pValCAR=2*tcdf(abs(tStatCAR),T-n,'upper');
+tStatCAR=CAR./seCAR
+pValCAR=2*tcdf(abs(tStatCAR),T-n,'upper')
 
 %% Tables
 colNames=allDataFiltered.Properties.VariableNames(4:end);
@@ -88,17 +87,17 @@ CAR_tab=array2table(CAR,'VariableNames',colNames);
 tStatCAR_tab=array2table(tStatCAR,'VariableNames',colNames);
 pValCAR_tab=array2table(pValCAR,'VariableNames',colNames);
 
-writetable(AR_tab,'output.xlsx','Sheet','AR');
-writetable(tStatAR_tab,'output.xlsx','Sheet','tStatAR');
-writetable(pValAR_tab,'output.xlsx','Sheet','pValAR');
+%writetable(AR_tab,'output.xlsx','Sheet','AR');
+%writetable(tStatAR_tab,'output.xlsx','Sheet','tStatAR');
+%writetable(pValAR_tab,'output.xlsx','Sheet','pValAR');
 
-writetable(CAR_tab,'output.xlsx','Sheet','CAR');
-writetable(tStatCAR_tab,'output.xlsx','Sheet','tStatCAR');
-writetable(pValCAR_tab,'output.xlsx','Sheet','pValCAR');
+%writetable(CAR_tab,'output.xlsx','Sheet','CAR');
+%writetable(tStatCAR_tab,'output.xlsx','Sheet','tStatCAR');
+%writetable(pValCAR_tab,'output.xlsx','Sheet','pValCAR');
 
 %% Ábrák
-seAAR=ones(eventWindowL,1)*sqrt(mean(seAR.^2));
-seCAAR=sqrt(cumsum(seAAR.^2));
+seAAR=seAR
+seCAAR=sqrt(cumsum(seAAR.^2))
 
 % Abnormális hozamok
 figure;

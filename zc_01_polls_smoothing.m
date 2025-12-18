@@ -2,8 +2,8 @@
 clear; close all; clc
 
 %% Load raw data
-dataBiden=readtable('Raw data\polls\polls.xlsx','Sheet','TrumpVBiden');
-dataHarris=readtable('Raw data\polls\polls.xlsx','Sheet','TrumpVHarris');
+dataBiden=readtable('Raw data/polls/polls.xlsx','Sheet','TrumpVBiden');
+dataHarris=readtable('Raw data/polls/polls.xlsx','Sheet','TrumpVHarris');
 
 %% Preprocess data
 dataBiden=zf_01_polls_clean(dataBiden);
@@ -50,4 +50,5 @@ pollData=[pollData;table(datetime(2024,11,5),49.8,48.3,1,'VariableNames',{'Date'
 pollData.TrumpLead=pollData.Republican-pollData.Democrat;
 pollData=pollData(:,{'Date','TrumpLead','IsHarris'});
 
-save('Preprocessed data\polls_smooth.mat','pollData');
+save('Preprocessed data/polls_smooth.mat','pollData');
+writetable(pollData,'Preprocessed data/polls_smooth.csv');

@@ -79,6 +79,9 @@ Raw data/*
 *.doc
 
 # ===========================
-# Bin folder
+# Bin & Lib folder
 # ===========================
 **/bin/
+**/lib/
+**/lib64/
+*.cfg

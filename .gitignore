@@ -86,3 +86,9 @@ Raw data/*
 **/lib64/
 *.cfg
 esemenyelemzes_beadando_2025/lib64
+
+# ===========================
+# myenv
+# ===========================
+myenv/
+myenv/*

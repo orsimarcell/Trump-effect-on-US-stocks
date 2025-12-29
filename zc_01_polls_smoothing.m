@@ -41,14 +41,14 @@ endH=find(dateH==election_day-days(1),1);
 datamat=[xB(:,startB:endB)',zeros(endB-startB+1,1); % All data excluding dates
          xH(:,startH:endH)',ones(endH-startH+1,1)];
 
-pollData=array2table(datamat,'VariableNames',{'Republican','Democrat','IsHarris'});
+pollData=array2table(datamat,'VariableNames',{'Republican','Democrat','Is_Harris'});
 pollData.Date=(dateB(startB):dateH(endH))';
 pollData=movevars(pollData,'Date','Before',1);
 
 % Add election results
-pollData=[pollData;table(datetime(2024,11,5),49.8,48.3,1,'VariableNames',{'Date','Republican','Democrat','IsHarris'})];
-pollData.TrumpLead=pollData.Republican-pollData.Democrat;
-pollData=pollData(:,{'Date','TrumpLead','IsHarris'});
+pollData=[pollData;table(datetime(2024,11,5),49.8,48.3,1,'VariableNames',{'Date','Republican','Democrat','Is_Harris'})];
+pollData.Trump_Lead=pollData.Republican-pollData.Democrat;
+pollData=pollData(:,{'Date','Trump_Lead','Is_Harris'});
 
 save('Preprocessed data/polls_smooth.mat','pollData');
 writetable(pollData,'Preprocessed data/polls_smooth.csv');
